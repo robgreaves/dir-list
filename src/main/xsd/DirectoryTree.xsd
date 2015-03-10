@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 sp1 U (http://www.xmlspy.com) by G (CITYPOINT) -->
+<xs:schema xmlns:dl="http://fgit.utils.Dirlist" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://Dirlist" targetNamespace="http://Dirlist" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:simpleType name="fileSize">
+		<xs:restriction base="xs:int"/>
+	</xs:simpleType>
+	<xs:simpleType name="filename">
+		<xs:restriction base="xs:string"/>
+	</xs:simpleType>
+	<xs:element name="Leaf">
+		<xs:annotation>
+			<xs:documentation> File details</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:attribute name="fileName" type="ns1:filename" use="required"/>
+			<xs:attribute name="fileSize" type="ns1:fileSize" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="DirectoryTree">
+		<xs:annotation>
+			<xs:documentation>Root of the directory tree.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="ns1:DirectoryTree" minOccurs="0" maxOccurs="unbounded"/>
+				<xs:element ref="ns1:Leaf" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="directoryName" type="ns1:filename" use="required"/>
+			<xs:attribute name="directorySize" type="ns1:fileSize" use="required"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
